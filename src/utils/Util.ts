@@ -84,5 +84,15 @@ export class Util {
         return ret;
     }
 
+    public getAuthor() : string {
+        var ret : string = "";
+
+        var conf: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration("autocomment");
+
+        ret = conf.get<string>("autor") as string;
+
+        return ret;
+    }
+
 };
 

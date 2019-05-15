@@ -8,25 +8,32 @@ export class AutoHeadComment {
                 
             }
         })
+
+        let disposable = vscode.commands.registerCommand('extension.insertautoheadcomment', () => {
+            vscode.window.showInformationMessage('Hello World!');
+        });
+    
+        context.subscriptions.push(disposable);
     }
 
     private static checkComment(event: vscode.TextDocumentChangeEvent): Boolean {
         var ret : Boolean = false;
 
-        if (event.document.languageId === "lua") {
+        var document = event.document;
+
+        var curentLine = event.contentChanges[0].range.start.line;
+        var lineText = document.lineAt(curentLine).text;
+
+        if (document.languageId === "lua") {
             if (event.contentChanges.length === 1) {
                 if (event.contentChanges[0].text === "-") {
-
-                    var curentLine = event.contentChanges[0].range.start.line;
-                    let lineText = event.document.lineAt(curentLine).text;
-
                     if (lineText.trim() === "---") {
                         // var range: vscode.Range = new vscode.Range(
                         //     new vscode.Position(curentLine + 1, 0),
-                        //     new vscode.Position(event.document.lineCount, 10000));
-                        // var text = event.document.getText(range);
+                        //     new vscode.Position(document.lineCount, 10000));
+                        // var text = document.getText(range);
 
-                        var insterText = this.createLuaHeadCommentString(event.document);
+                        var insterText = this.createLuaHeadCommentString(document);
                         var editor = vscode.window.activeTextEditor as vscode.TextEditor;
                         editor.edit(function (edit) {
                             edit.insert(event.contentChanges[0].range.start, insterText);
@@ -35,15 +42,12 @@ export class AutoHeadComment {
                 }
             }
         }
-        else if (event.document.languageId == "cpp") {
+        else if (document.languageId == "cpp") {
             if (event.contentChanges.length === 1) {
                 if (event.contentChanges[0].text === "/") {
 
-                    var curentLine = event.contentChanges[0].range.start.line;
-                    let lineText = event.document.lineAt(curentLine).text;
-
                     if (lineText.trim() === "/*/") {
-                        var insterText = this.createCppHeadCommentString(event.document);
+                        var insterText = this.createCppHeadCommentString(document);
                         var editor = vscode.window.activeTextEditor as vscode.TextEditor;
                         editor.edit(function (edit) {
                             edit.insert(event.contentChanges[0].range.start, insterText);
@@ -64,7 +68,7 @@ export class AutoHeadComment {
         ret += tabStr+"@file: " + Util.getInstance().getFileName(document) + "\n";
         ret += tabStr+"@desc: \n";
         ret += tabStr+"@time: "+ Util.getInstance().getCurData() + "\n";
-        ret += tabStr+"@autor: \n";
+        ret += tabStr+"@autor: " + Util.getInstance().getAuthor() + "\n";
         ret += tabStr+"@return \n";
         ret += "--==============================-";
         
@@ -78,7 +82,7 @@ export class AutoHeadComment {
         ret += tabStr+"@file: " + Util.getInstance().getFileName(document) + "\n";
         ret += tabStr+"@desc: \n";
         ret += tabStr+"@time: "+ Util.getInstance().getCurData() + "\n";
-        ret += tabStr+"@autor: \n";
+        ret += tabStr+"@autor: " + Util.getInstance().getAuthor() + "\n";
         ret += tabStr+"@return \n";
         ret += "==============================\n*";
         

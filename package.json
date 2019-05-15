@@ -16,10 +16,27 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "HelloWorld"
+				"command": "extension.insertautoheadcomment",
+				"title": "InsertAutoHeadComment"
 			}
-		]
+		],
+		"keybindings":[
+			{
+				"command": "extension.insertautoheadcomment",
+				"key": "CTRL+I"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "AutoComment Configuration",
+			"properties": {
+				"autocomment.autor": {
+					"type": "string",
+					"default": "autocomment",
+					"description": "文件创建者"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
