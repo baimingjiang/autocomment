@@ -65,7 +65,7 @@ export class Util {
         vscode.window.showErrorMessage(info);
     }
 
-    public getCurData() : string {
+    public getCurDate() : string {
         var ret : string = "";
 
         var date: Date = new Date();

@@ -11,6 +11,26 @@ export class AutoHeadComment {
 
         let disposable = vscode.commands.registerCommand('extension.insertautoheadcomment', () => {
             vscode.window.showInformationMessage('Hello World!');
+            var editor = vscode.window.activeTextEditor as vscode.TextEditor;
+            var document = editor.document;
+
+            var range: vscode.Range = new vscode.Range(
+                        new vscode.Position(0, 0),
+                        new vscode.Position(document.lineCount, 10000));
+            var text = document.getText(range);
+
+            for (var i = 1; i < document.lineCount; i ++) {
+                var textLine = document.lineAt(i);
+                var str = textLine.text;
+                if (str === "--==============================--") {
+                    var insertLine = i - 1;
+                    editor.edit(function (edit) {
+                        var insertStr : string = "    --@modify:" + Util.getInstance().getAuthor() +  " at " + Util.getInstance().getCurDate() + "\n";
+                        edit.insert(new vscode.Position(insertLine, 0), insertStr);
+                    });
+                }
+            }
+
         });
     
         context.subscriptions.push(disposable);
@@ -67,7 +87,7 @@ export class AutoHeadComment {
         var ret = "==============================--\n";
         ret += tabStr+"@file: " + Util.getInstance().getFileName(document) + "\n";
         ret += tabStr+"@desc: \n";
-        ret += tabStr+"@time: "+ Util.getInstance().getCurData() + "\n";
+        ret += tabStr+"@time: "+ Util.getInstance().getCurDate() + "\n";
         ret += tabStr+"@autor: " + Util.getInstance().getAuthor() + "\n";
         ret += tabStr+"@return \n";
         ret += "--==============================-";
@@ -81,7 +101,7 @@ export class AutoHeadComment {
         var ret = "\n==============================\n";
         ret += tabStr+"@file: " + Util.getInstance().getFileName(document) + "\n";
         ret += tabStr+"@desc: \n";
-        ret += tabStr+"@time: "+ Util.getInstance().getCurData() + "\n";
+        ret += tabStr+"@time: "+ Util.getInstance().getCurDate() + "\n";
         ret += tabStr+"@autor: " + Util.getInstance().getAuthor() + "\n";
         ret += tabStr+"@return \n";
         ret += "==============================\n*";
