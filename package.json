@@ -4,20 +4,20 @@
 	"description": "insert comment on your file.",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.33.0"
+		"vscode": "^1.30.0"
 	},
 	"categories": [
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"title": "HelloWorld"
 			}
 		]
 	},
