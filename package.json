@@ -23,6 +23,11 @@
 		"keybindings":[
 			{
 				"command": "extension.insertautoheadcomment",
+				"key": "CTRL+I",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "extension.insertmodifycomment",
 				"key": "CTRL+M",
 				"when": "editorTextFocus"
 			}
