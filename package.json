@@ -2,7 +2,7 @@
 	"name": "autoheadcomment",
 	"displayName": "AutoHeadComment",
 	"description": "文件头插入版本描述信息",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.30.0"
 	}, 
