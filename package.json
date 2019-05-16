@@ -1,8 +1,8 @@
 {
-	"name": "autoheadcomment",
-	"displayName": "AutoHeadComment",
-	"description": "文件头插入版本描述信息",
-	"version": "1.0.1",
+	"name": "autocomments",
+	"displayName": "AutoComments Helper",
+	"description": "This extension allows quickly add comments in the active text editor. And also allows update the modify time and modifier automatic in the file header comments",
+	"version": "1.0.2",
 	"engines": {
 		"vscode": "^1.30.0"
 	}, 

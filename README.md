@@ -1,8 +1,8 @@
-# 描述
+# Auto-Comments
 
-代码文件头加入版本描述信息
+This extension allows quickly add comments in the active text editor. And also allows update the modify time and modifier automatic in the file header comments
 
-# 使用
+## Extension Usage
 
 Ctrl+I: Insert comments in file head firstly.
 
@@ -33,7 +33,7 @@ Ctrl+M: Insert modify author.
 
 ## Extension Settings
 
-* `autocomment.autor`: 自定义文件修改者
+* `autocomment.autor`: custom author's name.
 
 ## Known Issues
 
@@ -41,8 +41,6 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.1
+### 1.0.2
 
 Initial release of ...
