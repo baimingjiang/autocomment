@@ -6,24 +6,34 @@ export class AutoHeadComment {
 
     public static init(context: vscode.ExtensionContext) {
         vscode.workspace.onDidChangeTextDocument(event => {
-            if(this.insertComment(event)){ }
-        })
+            var ret = this.insertComment(event)
+        });
 
         let disposable = vscode.commands.registerCommand('extension.insertmodifycomment', () => {
-            vscode.window.showInformationMessage('Insert modified comments by ' + Util.getInstance().getAuthor());
-            this.insertModifyComment()
+            var ret = this.insertModifyComment()
+            if (ret) {
+                vscode.window.showInformationMessage('Insert modified comments by ' + Util.getInstance().getAuthor());
+            }
+            else {
+                vscode.window.showInformationMessage('Insert failed');
+            }
         });
         context.subscriptions.push(disposable);
 
         let disposable1 = vscode.commands.registerCommand("extension.insertautoheadcomment", () => {
-            vscode.window.showInformationMessage('Insert head comments by ' + Util.getInstance().getAuthor());
-            this.insertAutoHeadComment()
+            var ret = this.insertAutoHeadComment()
+            if (ret) {
+                vscode.window.showInformationMessage('Insert head comments by ' + Util.getInstance().getAuthor());
+            }
+            else {
+                vscode.window.showInformationMessage('Insert failed');
+            }
         });
         context.subscriptions.push(disposable1);
     }
 
     private static insertComment(event: vscode.TextDocumentChangeEvent): Boolean {
-        var ret : Boolean = false;
+        var ret : Boolean = true;
 
         var document = event.document;
         var editor = vscode.window.activeTextEditor as vscode.TextEditor;
@@ -74,6 +84,8 @@ export class AutoHeadComment {
     }
 
     private static insertAutoHeadComment() {
+        var ret : boolean = true;
+
         var editor = vscode.window.activeTextEditor as vscode.TextEditor;
         
         if (editor) {
@@ -84,9 +96,16 @@ export class AutoHeadComment {
                 edit.insert(new vscode.Position(0, 0), insterText);
             });
         }
+        else {
+            ret = true;
+        }
+
+        return ret;
     }
 
     private static insertModifyComment() {
+        var ret : boolean = true;
+
         var editor = vscode.window.activeTextEditor as vscode.TextEditor;
         if (editor) {
             var document = editor.document;
@@ -101,13 +120,18 @@ export class AutoHeadComment {
                 var str = textLine.text;
                 if (str === this.splitLineStrForLua) {
                     var insertLine = i - 1;
+                    var insertStr : string = this.createModifyCommentString();
                     editor.edit(function (edit) {
-                        var insertStr : string = "    --@modify:" + Util.getInstance().getAuthor() +  " at " + Util.getInstance().getCurDate() + "\n";
                         edit.insert(new vscode.Position(insertLine, 0), insertStr);
                     });
                 }
             }
         }
+        else {
+            ret = false;
+        }
+
+        return ret;
     }
 
     private static createLuaHeadCommentString(document : vscode.TextDocument) {
@@ -121,7 +145,7 @@ export class AutoHeadComment {
         ret += tabStr+"@time: "+ Util.getInstance().getCurDate() + "\n";
         ret += tabStr+"@autor: " + Util.getInstance().getAuthor() + "\n";
         ret += tabStr+"@return \n";
-        ret += this.splitLineStrForLua;
+        ret += this.splitLineStrForLua + "\n";
         
         return ret;
     }
@@ -129,13 +153,13 @@ export class AutoHeadComment {
     private static createCppHeadCommentString(document : vscode.TextDocument) {
         var tabStr : string = "    "
 
-        var ret = "\n/******************************\n";
+        var ret = "/******************************" + "\n";
         ret += tabStr+"@file: " + Util.getInstance().getFileName(document) + "\n";
         ret += tabStr+"@desc: \n";
         ret += tabStr+"@time: "+ Util.getInstance().getCurDate() + "\n";
         ret += tabStr+"@autor: " + Util.getInstance().getAuthor() + "\n";
         ret += tabStr+"@return \n";
-        ret += "******************************\n*/";
+        ret += "*******************************/" + "\n";
         
         return ret;
     }
@@ -143,7 +167,7 @@ export class AutoHeadComment {
     private static createModifyCommentString() {
         var ret : string = "";
 
-        ret = "    --@modify:" + Util.getInstance().getAuthor() +  " at " + Util.getInstance().getCurDate() + "\n";
+        ret = "    --@modify: " + Util.getInstance().getAuthor() +  " at " + Util.getInstance().getCurDate() + "\n";
 
         return ret;
     }
