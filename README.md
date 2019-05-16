@@ -4,13 +4,34 @@ This is the README for your extension "autoheadcomment". After writing up a brie
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Insert head comments for you code file.
 
-For example if there is an image subfolder under your extension project workspace:
+Ctrl+I: Insert comments in file head firstly.
 
-\!\[feature X\]\(images/feature-x.png\)
+```lua
+--==============================--
+    --@file: Context.lua
+    --@desc: 
+    --@time: 2019-5-16 11:55:11
+    --@autor: autoheadcomment
+    --@return Context
+--==============================--
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+```
+
+Ctrl+M: Insert modify author.
+
+```lua
+--==============================--
+    --@file: Context.lua
+    --@desc: 
+    --@time: 2019-5-16 11:55:11
+    --@autor: autoheadcomment
+    --@modify: autoheadcomment at 2019-5-16 11:55:25
+    --@return Context
+--==============================--
+
+```
 
 ## Requirements
 
@@ -18,14 +39,7 @@ If you have any requirements or dependencies, add a section describing those and
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `autocomment.autor`: set your name to insert author
 
 ## Known Issues
 
@@ -38,28 +52,3 @@ Users appreciate release notes as you update your extension.
 ### 1.0.0
 
 Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
