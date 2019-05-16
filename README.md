@@ -1,10 +1,8 @@
-# autoheadcomment README
+# 描述
 
-This is the README for your extension "autoheadcomment". After writing up a brief description, we recommend including the following sections.
+代码文件头加入版本描述信息
 
-## Features
-
-Insert head comments for you code file.
+# 使用
 
 Ctrl+I: Insert comments in file head firstly.
 
@@ -33,13 +31,9 @@ Ctrl+M: Insert modify author.
 
 ```
 
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
 ## Extension Settings
 
-* `autocomment.autor`: set your name to insert author
+* `autocomment.autor`: 自定义文件修改者
 
 ## Known Issues
 
