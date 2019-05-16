@@ -1,11 +1,12 @@
 {
 	"name": "autoheadcomment",
 	"displayName": "AutoHeadComment",
-	"description": "insert comment on your file.",
+	"description": "文件头插入版本描述信息",
 	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.30.0"
-	},
+	}, 
+	"publisher": "baimingjiang",
 	"categories": [
 		"Other"
 	],
